@@ -39,6 +39,7 @@ Parameters:
     -v          Print Version
     -i <file>   Input file (default: stdin)
     -o <file>   Output to file (default: stdout)
+    --skipout   Read only the data, no output
  
 EOT;
         echo "\n\n";
@@ -47,7 +48,7 @@ EOT;
 
     public static function run()
     {
-        $opts = phore_getopt("hdvi:o:");
+        $opts = phore_getopt("hdvi:o:", ["skipout"]);
 
         if ($opts->has("h")) {
             self::printHelp();
@@ -82,8 +83,10 @@ EOT;
             "first_ts" => null,
             "last_ts" => null,
         ];
-        $reader->setOnDataCallback(function ($timestamp, $colname, $unit, $value) use ($outputStream) {
-            $outputStream->write(implode(";", [$timestamp, $colname, $unit, $value]) . "\n");
+        $skipOut = $opts->has("skipout");
+        $reader->setOnDataCallback(function ($timestamp, $colname, $unit, $value) use ($outputStream, $skipOut) {
+            if (! $skipOut)
+                $outputStream->write(implode(";", [$timestamp, $colname, $unit, $value]) . "\n");
         });
         $reader->read();
 
