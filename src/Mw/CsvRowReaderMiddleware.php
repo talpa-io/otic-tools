@@ -14,6 +14,9 @@ class CsvRowReaderMiddleware
 
 
 
+    public function defineCol()
+
+
 
 
 

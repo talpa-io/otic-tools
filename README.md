@@ -3,8 +3,24 @@
 
 ## Benchgen
 
-**Create 100000 datasets with 1000 sensor names**
+Create reproducible csv output for testing timeseries
+
+**Create 30min data (sampled 0.1 hz) 18000 datasets with 1000 sensor names**
 
 ```
-benchgen -n 100000 -s 1000 | oticpack -o /tmp/outfile.otic
+benchgen -n 18000 -s 1000  -o /tmp/test.csv
+oticpack -i /tmp/test.csv -o /tmp/test.otic
+dumpotic -i /tmp/test.otic --skipout
 ```
+
+**Using direct chaining**
+
+```
+benchgen | oticpack | dumpotic
+```
+
+
+## Oticpack
+
+
+
