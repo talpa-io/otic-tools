@@ -1,0 +1,20 @@
+#!/usr/bin/php
+<?php
+/**
+ * Created by PhpStorm.
+ * User: matthias
+ * Date: 11.03.20
+ * Time: 12:23
+ */
+
+namespace OticTools;
+
+if (file_exists(__DIR__ . "/../vendor/autoload.php")) {
+    require __DIR__ . "/../vendor/autoload.php";
+} else {
+    require __DIR__ . "/../../../autoload.php";
+}
+
+BenchGenCli::run();
+
+

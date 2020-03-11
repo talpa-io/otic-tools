@@ -14,6 +14,11 @@ use OticTools\Core\OticConfig;
 use OticTools\Mw\OticWriterMiddleware;
 use OticTools\Mw\PrintWriterMiddleware;
 
+/**
+ * Class OticDumpCli
+ * @package OticTools
+ * @internal
+ */
 class OticDumpCli
 {
 

@@ -21,6 +21,7 @@
   },
   "bin": [
     "bin/oticpack",
+    "bin/benchgen",
     "bin/dumpotic"
   ],
   "autoload": {

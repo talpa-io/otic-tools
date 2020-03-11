@@ -9,16 +9,17 @@
 namespace OticTools;
 
 
+use Otic\OticReader;
 use OticTools\Core\OticConfig;
 use OticTools\Mw\OticWriterMiddleware;
 use OticTools\Mw\PrintWriterMiddleware;
 
 /**
- * Class OticPackCli
+ * Class BenchGenCli
  * @package OticTools
  * @internal
  */
-class OticPackCli
+class BenchGenCli
 {
 
 
@@ -26,7 +27,7 @@ class OticPackCli
     {
         echo <<<EOT
 
-Open Telemetry Interchange Container - Packager and Formating
+Csv Generator for benchmarking
 
 Usage:
 
@@ -36,10 +37,10 @@ Parameters:
 
     -h          Print Help
     -v          Print Version
-    -i <file>   Input file (default: stdin)
-    -m <file>   Load Middleware file (required)
+    -n <num>    Number of records to create
+    -s <num>    Number of sensors to create
     -o <file>   Output to file (default: stdout)
-    -d          Output readable converted information
+ 
 EOT;
         echo "\n\n";
 
@@ -47,7 +48,7 @@ EOT;
 
     public static function run()
     {
-        $opts = phore_getopt("hdvi:o:m:");
+        $opts = phore_getopt("hdvo:n:s:");
 
         if ($opts->has("h")) {
             self::printHelp();
@@ -60,34 +61,32 @@ EOT;
         }
 
 
-        $middleWareFile = $opts->get("m", __DIR__ . "/../src/default_csvevt_mw.php");
-        require $middleWareFile;
-
-
-        $inputFile = $opts->get("i", "php://stdin");
-        if ($inputFile === "php://stdin" && posix_isatty(STDIN)) {
-            self::printHelp();
-            exit (127);
-        }
-
 
         $outputFile = $opts->get("o", "php://stdout");
         if ($outputFile == "php://stdout" && posix_isatty(STDOUT)) {
 
         }
 
+        $outputFile = phore_file($outputFile);
+        $outputStream = $outputFile->fopen("w+");
 
-        $middleware = OticConfig::GetWriterMiddleWareSource();
-        if ($opts->has("d")) {
-            $middleware->setNext(new PrintWriterMiddleware($outputFile));
-        } else {
-            $middleware->setNext(new OticWriterMiddleware($outputFile));
+        $ppi = $opts->get("n", 10);
+        $pps = $opts->get("s", 10);
+        $starttime = strtotime("2018-01-01");
+
+        for ($i = 0; $i<$ppi; $i++) {
+            for ($p = 0; $p < $pps; $p++) {
+                $cur = [
+                    $starttime + $i/10,
+                    "sen_" . md5($p),
+                    "mu_$p",
+                    $i + $p
+                ];
+
+                $outputStream->write(implode(";", $cur) . "\n");
+            }
         }
-
-
-        $middleware->message(["in_file" => $inputFile]);
-        $middleware->onClose();
-
+        $outputStream->fclose();
     }
 
 
