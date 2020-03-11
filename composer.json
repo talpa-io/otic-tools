@@ -1,0 +1,36 @@
+{
+  "name": "talpa/otic-tools",
+  "description": "otic tools",
+  "license": "MIT",
+  "homepage": "https://infracamp.org/phore/",
+  "authors": [
+    { "name": "Matthias Leuffen", "email": "m@tth.es" }
+  ],
+  "repositories": [
+  ],
+  "require": {
+    "php": ">=7.1",
+    "phore/core": "dev-master",
+    "phore/filesystem": "dev-master",
+    "phore/cli": "dev-master",
+    "phore/log": "dev-master",
+    "phore/system": "dev-master"
+  },
+  "suggest": {
+  },
+  "bin": [
+    "bin/oticpack.php"
+  ],
+  "autoload": {
+    "psr-4": {
+      "OticTools\\": "src/"
+    },
+    "files": [
+    ]
+  },
+  "minimum-stability": "dev",
+  "require-dev": {
+    "talpa/otic-php": "dev-otic_v3",
+    "phpunit/phpunit": "*"
+  }
+}

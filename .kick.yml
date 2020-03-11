@@ -1,0 +1,18 @@
+version: 1
+from: "infracamp/kickstart-flavor-gaia:testing"
+
+apache_fallback_resource: "/index.php"
+
+command:
+  build:
+    - "composer update"
+    - "vendor/talpa/otic-php/lib/install-otic-extension.sh"
+
+  test:
+    - "vendor/bin/phpunit"
+
+
+  bench:
+    - "sudo phpdismod xdebug"
+    - "vendor/bin/phpunit"
+
