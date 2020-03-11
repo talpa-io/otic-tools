@@ -26,8 +26,22 @@ class CsvEvntReaderMiddleware extends AbstractOticMiddleware
 
     /**
      *
+     * Expects Message:
+     *
+     * ["in_file" => <filename to parse>]
+     *
+     * Sends Message:
+     *
+     * [
+     *  "ts" => <timestamp float>
+     *  "signal_name" => <signal_name:string>
+     *  "mu" => <measurement unit:string>
+     *  "val" => <value:mixed>
+     * ]
+     *
      * @param array|null $data
      * @return mixed
+     * @throws \Phore\FileSystem\Exception\FileAccessException
      */
     public function message(array $data)
     {
