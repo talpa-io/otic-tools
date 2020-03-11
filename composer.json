@@ -20,7 +20,8 @@
     "talpa/otic-php": "select otic library branch as you want"
   },
   "bin": [
-    "bin/oticpack"
+    "bin/oticpack",
+    "bin/dumpotic"
   ],
   "autoload": {
     "psr-4": {
