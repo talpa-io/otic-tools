@@ -15,7 +15,7 @@ use OticTools\Mw\CsvEvntReaderMiddleware;
 
 $map = [
     0 => "ts",
-    1 => "sig_name",
+    1 => "signal_name",
     2 => "mu",
     3 => "val"
 ];

@@ -49,6 +49,12 @@ EOT;
             exit (127);
         }
 
+        if ($opts->has("v")) {
+            echo "Libotic version: " . \Otic\getLibOticVersion() . "\n";
+            exit(127);
+        }
+
+
         $middleWareFile = $opts->get("m", __DIR__ . "/../src/default_csvevt_mw.php");
         require $middleWareFile;
 
