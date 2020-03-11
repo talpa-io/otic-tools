@@ -71,7 +71,7 @@ EOT;
         $outputStream = $outputFile->fopen("w+");
 
         $reader = new OticReader();
-        $reader->open($inputFile);
+        $reader->open(phore_file($inputFile)->fopen("r")->getRessource());
         $stats = [
             "records" => 0,
             "first_ts" => null,
