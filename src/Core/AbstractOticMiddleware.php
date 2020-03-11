@@ -6,7 +6,7 @@
  * Time: 14:08
  */
 
-namespace OticTools;
+namespace OticTools\Core;
 
 
 abstract class AbstractOticMiddleware implements OticMiddleware

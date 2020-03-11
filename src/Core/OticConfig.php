@@ -6,7 +6,7 @@
  * Time: 13:58
  */
 
-namespace OticTools;
+namespace OticTools\Core;
 
 
 class OticConfig

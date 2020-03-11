@@ -17,9 +17,10 @@
     "phore/system": "dev-master"
   },
   "suggest": {
+    "talpa/otic-php": "select otic library branch as you want"
   },
   "bin": [
-    "bin/oticpack.php"
+    "bin/oticpack"
   ],
   "autoload": {
     "psr-4": {

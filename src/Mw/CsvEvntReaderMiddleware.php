@@ -6,10 +6,10 @@
  * Time: 18:06
  */
 
-namespace OticTools\Base;
+namespace OticTools\Mw;
 
 
-use OticTools\AbstractOticMiddleware;
+use OticTools\Core\AbstractOticMiddleware;
 
 class CsvEvntReaderMiddleware extends AbstractOticMiddleware
 {

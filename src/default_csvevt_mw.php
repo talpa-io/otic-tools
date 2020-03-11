@@ -10,7 +10,8 @@
 namespace OticTools;
 
 
-use OticTools\Base\CsvEvntReaderMiddleware;
+use OticTools\Core\OticConfig;
+use OticTools\Mw\CsvEvntReaderMiddleware;
 
 $map = [
     0 => "ts",

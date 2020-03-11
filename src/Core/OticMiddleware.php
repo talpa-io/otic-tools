@@ -6,7 +6,7 @@
  * Time: 13:41
  */
 
-namespace OticTools;
+namespace OticTools\Core;
 
 
 interface OticMiddleware

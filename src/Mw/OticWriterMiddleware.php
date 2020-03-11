@@ -6,10 +6,10 @@
  * Time: 12:54
  */
 
-namespace OticTools\Base;
+namespace OticTools\Mw;
 
 
-use OticTools\AbstractOticMiddleware;
+use OticTools\Core\AbstractOticMiddleware;
 
 class OticWriterMiddleware extends AbstractOticMiddleware
 {

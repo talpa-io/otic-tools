@@ -6,10 +6,10 @@
  * Time: 12:55
  */
 
-namespace OticTools\Base;
+namespace OticTools\Mw;
 
 
-use OticTools\AbstractOticMiddleware;
+use OticTools\Core\AbstractOticMiddleware;
 use Phore\FileSystem\PhoreFile;
 
 class PrintWriterMiddleware extends AbstractOticMiddleware
