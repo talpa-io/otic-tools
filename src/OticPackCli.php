@@ -90,7 +90,7 @@ EOT;
             $chain->add(new OticWriterMiddleware($outputFile));
         }
 
-        $chain->getFirst()->message(["in_file" => $inputFile]);
+        $chain->getFirst()->message(["file_in" => $inputFile]);
         $chain->getFirst()->onClose();
 
         if ($stats !== null)

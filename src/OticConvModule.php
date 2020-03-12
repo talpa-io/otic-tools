@@ -90,7 +90,7 @@ class OticConvModule implements AppModule {
             }
 
 
-            $chain->getFirst()->message(["in_file" => "php://input"]);
+            $chain->getFirst()->message(["file_in" => "php://input"]);
             $chain->getFirst()->onClose();
 
             if ($stats !== null)

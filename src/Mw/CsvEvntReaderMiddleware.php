@@ -46,7 +46,7 @@ class CsvEvntReaderMiddleware extends AbstractOticMiddleware
      */
     public function message(array $data)
     {
-        $inFile = phore_file($data["in_file"]);
+        $inFile = phore_file($data["file_in"]);
         $stream = $inFile->fopen("r");
 
         while ( ! $stream->feof()) {
