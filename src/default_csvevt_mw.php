@@ -13,6 +13,7 @@ namespace OticTools;
 use OticTools\Core\OticChain;
 use OticTools\Core\OticConfig;
 use OticTools\Mw\CsvEvntReaderMiddleware;
+use OticTools\Mw\VerifyUnitsMiddleware;
 
 $map = [
     0 => "ts",
@@ -24,6 +25,6 @@ $map = [
 
 $chain = new OticChain();
 $chain->add(new CsvEvntReaderMiddleware(";", $map));
-
+$chain->add(new VerifyUnitsMiddleware());
 
 OticConfig::SetMwChain($chain);

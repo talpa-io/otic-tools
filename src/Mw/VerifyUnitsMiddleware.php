@@ -35,8 +35,11 @@ class VerifyUnitsMiddleware extends AbstractOticMiddleware
     public function message(array $data)
     {
         $unit = $data["mu"];
-        if ( ! isset ($this->allowedUnits[$unit]))
+        if ( ! isset ($this->allowedUnits[$unit])) {
+            $this->stats->skip("Unit '$unit' not allowed (Sensor: '{$data["signal_name"]}')");
+            $this->stats->statsIncr("verify_unit.skipped");
             return;
+        }
         $this->next->message($data);
     }
 }
