@@ -56,6 +56,7 @@ class OticConvModule implements AppModule {
         $app->activateExceptionErrorHandlers();
         $app->setOnExceptionHandler(new JsonExceptionHandler());
         $app->setResponseHandler(new JsonResponseHandler());
+
         set_time_limit(1200);
 
         $app->router->get("/", function () {
