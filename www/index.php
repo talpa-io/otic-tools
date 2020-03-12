@@ -1,6 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
+ * Default converter template from talpa/otic-tools
+ *
  * User: matthias
  * Date: 12.03.20
  * Time: 09:52
@@ -10,7 +11,6 @@ namespace App;
 
 use OticTools\OticConvModule;
 use Phore\MicroApp\App;
-use Phore\MicroApp\Handler\JsonExceptionHandler;
 
 require __DIR__ . "/../vendor/autoload.php";
 
@@ -22,9 +22,10 @@ $middleWareMap = [
 
 ];
 
-
 $app = new App();
+$app->activateExceptionErrorHandlers();
 $app->acl->addRule(aclRule()->route("/*")->ALLOW());
+
 $app->addModule(new OticConvModule($middleWareMap));
 
 $app->serve();
