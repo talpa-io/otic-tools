@@ -10,6 +10,7 @@
 namespace OticTools;
 
 
+use OticTools\Core\OticChain;
 use OticTools\Core\OticConfig;
 use OticTools\Mw\CsvEvntReaderMiddleware;
 
@@ -20,7 +21,9 @@ $map = [
     3 => "val"
 ];
 
-$csvReader = new CsvEvntReaderMiddleware(";", $map);
+
+$chain = new OticChain();
+$chain->add(new CsvEvntReaderMiddleware(";", $map));
 
 
-OticConfig::AddWriterMiddleWare($csvReader);
+OticConfig::SetMwChain($chain);

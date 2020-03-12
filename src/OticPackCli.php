@@ -79,19 +79,19 @@ EOT;
 
         }
 
-        $middleware = OticConfig::GetWriterMiddleWareSource();
+        $chain = OticConfig::GetMwChain();
         $stats = null;
         if ($opts->has("s")) {
-            $middleware->setNext(new NullWriterMiddelware());
-            $middleware->setStats($stats = new OticStats());
+            $chain->add(new NullWriterMiddelware());
+            $chain->getFirst()->setStats($stats = new OticStats());
         } elseif ($opts->has("d")) {
-            $middleware->setNext(new PrintWriterMiddleware($outputFile));
+            $chain->add(new PrintWriterMiddleware($outputFile));
         } else {
-            $middleware->setNext(new OticWriterMiddleware($outputFile));
+            $chain->add(new OticWriterMiddleware($outputFile));
         }
 
-        $middleware->message(["in_file" => $inputFile]);
-        $middleware->onClose();
+        $chain->getFirst()->message(["in_file" => $inputFile]);
+        $chain->getFirst()->onClose();
 
         if ($stats !== null)
             echo $stats->printStats();

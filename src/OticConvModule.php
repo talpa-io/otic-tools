@@ -67,22 +67,22 @@ class OticConvModule implements AppModule {
 
             $outputFile = phore_file("php://stdout")->fopen("w")->getRessource();
             $stats = null;
-            $middleware = OticConfig::GetWriterMiddleWareSource();
+            $chain = OticConfig::GetMwChain();
             switch ($ctype) {
                 case "convert":
                     header("Content-Type: application/binary;");
-                    $middleware->setNext(new OticWriterMiddleware($outputFile));
+                    $chain->add(new OticWriterMiddleware($outputFile));
                     break;
 
                 case "csv":
                     header("Content-Type: text/csv; charset=utf-8");
-                    $middleware->setNext(new PrintWriterMiddleware($outputFile));
+                    $chain->add(new PrintWriterMiddleware($outputFile));
                     break;
 
                 case "stats":
                     header("Content-Type: text/plain; charset=utf-8");
-                    $middleware->setNext(new NullWriterMiddelware());
-                    $middleware->setStats($stats = new OticStats());
+                    $chain->add(new NullWriterMiddelware());
+                    $chain->getFirst()->setStats($stats = new OticStats());
                     break;
 
                 default:
@@ -91,8 +91,8 @@ class OticConvModule implements AppModule {
 
 
 
-            $middleware->message(["in_file" => "php://input"]);
-            $middleware->onClose();
+            $chain->getFirst()->message(["in_file" => "php://input"]);
+            $chain->getFirst()->onClose();
 
             if ($stats !== null)
                 echo $stats->printStats();

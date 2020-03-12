@@ -11,28 +11,19 @@ namespace OticTools\Core;
 
 class OticConfig
 {
+    private static $chain;
 
-    private static $writerMiddleware = [];
-
-    public static function AddWriterMiddleWare (OticMiddleware $oticMiddleware)
+    public static function SetMwChain(OticChain $chain)
     {
-        self::$writerMiddleware[] = $oticMiddleware;
-        if (count (self::$writerMiddleware) > 1) {
-            self::$writerMiddleware[count (self::$writerMiddleware) - 2]->setNext($oticMiddleware);
-        }
+        self::$chain = $chain;
     }
 
 
-    public static function GetWriterMiddleWareSource() : ?OticMiddleware
+    public static function GetMwChain() : OticChain
     {
-        if (count (self::$writerMiddleware) === 0)
-            return null;
-        return self::$writerMiddleware[0];
-    }
-
-    public static function GetWriterMiddleWareDrain() : OticMiddleware
-    {
-        return self::$writerMiddleware[count(self::$writerMiddleware)-1];
+        if (self::$chain === null)
+            throw new \InvalidArgumentException("No OticChain registered to OticConfig");
+        return self::$chain;
     }
 
 }
