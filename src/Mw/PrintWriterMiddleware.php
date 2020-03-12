@@ -26,6 +26,7 @@ class PrintWriterMiddleware extends AbstractOticMiddleware
 
     public function __construct(string $outputFileName)
     {
+        parent::__construct();
         $this->file = new PhoreFile($outputFileName);
         $this->fh = $this->file->fopen("w+");
     }

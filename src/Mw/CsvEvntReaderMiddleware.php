@@ -19,6 +19,7 @@ class CsvEvntReaderMiddleware extends AbstractOticMiddleware
 
     public function __construct(string $delimiter, array $map)
     {
+        parent::__construct();
         $this->delimiter = $delimiter;
         $this->map = $map;
     }
@@ -50,11 +51,13 @@ class CsvEvntReaderMiddleware extends AbstractOticMiddleware
 
         while ( ! $stream->feof()) {
             $line = $stream->freadcsv(0, $this->delimiter);
+            $this->stats->statsIncr("read.lines.csv.total");
             if ($line === null)
                 continue;
 
             if (count($line) == 0)
                 continue; // Ingore empty lines
+            $this->stats->statsIncr("read.lines.csv.data");
             $msg = [];
             foreach ($this->map as $key => $val) {
                 if (! isset ($line[$key]))

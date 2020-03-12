@@ -21,6 +21,8 @@ interface OticMiddleware
     public function onClose();
     
     public function setNext(OticMiddleware $next);
+
+    public function setStats(OticStats $stats);
 }
 
 

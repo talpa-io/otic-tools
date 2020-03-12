@@ -19,6 +19,7 @@ class OticWriterMiddleware extends AbstractOticMiddleware
 
     public function __construct(string $outputFile = "php://stdout")
     {
+        parent::__construct();
         $this->oticWriter = new OticWriter();
         $this->oticWriter->open($outputFile);
     }

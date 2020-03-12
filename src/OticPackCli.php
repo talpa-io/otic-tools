@@ -10,6 +10,8 @@ namespace OticTools;
 
 
 use OticTools\Core\OticConfig;
+use OticTools\Core\OticStats;
+use OticTools\Mw\NullWriterMiddelware;
 use OticTools\Mw\OticWriterMiddleware;
 use OticTools\Mw\PrintWriterMiddleware;
 
@@ -40,6 +42,7 @@ Parameters:
     -m <file>   Load Middleware file (required)
     -o <file>   Output to file (default: stdout)
     -d          Output readable converted information
+    -s          Print statistics and warnings
 EOT;
         echo "\n\n";
 
@@ -47,7 +50,7 @@ EOT;
 
     public static function run()
     {
-        $opts = phore_getopt("hdvi:o:m:");
+        $opts = phore_getopt("hdvi:o:m:s");
 
         if ($opts->has("h")) {
             self::printHelp();
@@ -76,17 +79,22 @@ EOT;
 
         }
 
-
         $middleware = OticConfig::GetWriterMiddleWareSource();
-        if ($opts->has("d")) {
+        $stats = null;
+        if ($opts->has("s")) {
+            $middleware->setNext(new NullWriterMiddelware());
+            $middleware->setStats($stats = new OticStats());
+        } elseif ($opts->has("d")) {
             $middleware->setNext(new PrintWriterMiddleware($outputFile));
         } else {
             $middleware->setNext(new OticWriterMiddleware($outputFile));
         }
 
-
         $middleware->message(["in_file" => $inputFile]);
         $middleware->onClose();
+
+        if ($stats !== null)
+            echo $stats->printStats();
 
     }
 
