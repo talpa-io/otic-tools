@@ -26,6 +26,7 @@ class GzipUnpackerMiddleware extends AbstractOticMiddleware
             throw new \InvalidArgumentException("Expected array element 'file_in'");
 
         $inFile = $origInFile = phore_file($data["file_in"]);
+        
         if ($data["file_in"] == "php://input") {
             $inFile = phore_tempfile();
             $origInFile->streamCopyTo($inFile);
@@ -35,12 +36,13 @@ class GzipUnpackerMiddleware extends AbstractOticMiddleware
         $tmp = phore_tempfile();
         $tmpWriter = $tmp->fopen("w+");
         $inFileStream = $inFile->gzopen("r");
-
+        
         while ( ! $inFileStream->feof()) {
             $tmpWriter->fwrite($inFileStream->fread(8012));
         }
         $tmpWriter->fclose();
         $inFileStream->fclose();
+        
         $this->stats->statsVal("gzipunpacker.size.uncompressed", $tmp->fileSize());
         $this->next->message(["file_in"=>(string)$tmp]);
     }
