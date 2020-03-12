@@ -22,6 +22,18 @@ class GzipUnpackerMiddleware extends AbstractOticMiddleware
      */
     public function message(array $data)
     {
-        // TODO: Implement message() method.
+        if ( ! isset($data["file_in"]))
+            throw new \InvalidArgumentException("Expected array element 'file_in'");
+        $tmp = phore_tempfile();
+        $tmpWriter = $tmp->fopen("w+");
+        $inFileStream = phore_file($data["file_in"])->gzopen("r");
+
+        while ( ! $inFileStream->feof()) {
+            $tmpWriter->fwrite($inFileStream->fread(8012));
+        }
+        $tmpWriter->fclose();
+        $inFileStream->fclose();
+        $this->stats->statsVal("gzipunpacker.size.uncompressed", $tmp->fileSize());
+        $this->next->message(["file_in"=>(string)$tmp]);
     }
 }
