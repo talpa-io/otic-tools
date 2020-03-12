@@ -9,7 +9,7 @@
 namespace OticTools\Core;
 
 
-class OticChain extends AbstractOticMiddleware
+class OticChain
 {
 
 
@@ -24,15 +24,11 @@ class OticChain extends AbstractOticMiddleware
     private $last = null;
 
 
-    public function message(array $data)
-    {
-        $this->first->message($data);
-    }
+
 
     public function add(OticMiddleware $mw)
     {
         if ($this->first === null) {
-            $this->setNext($mw);
             $this->first = $mw;
             $this->last = $mw;
             return $this;

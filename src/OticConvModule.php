@@ -65,12 +65,12 @@ class OticConvModule implements AppModule {
         $app->router->post("/v1/:ctype/:tmid?/:dtype?", function ($ctype, string $tmid=null, string $dtype=null) {
             $this->_loadMiddlewareByDtype($dtype);
 
-            $outputFile = phore_file("php://stdout")->fopen("w")->getRessource();
+            $outputFile = "php://output";
             $stats = null;
             $chain = OticConfig::GetMwChain();
             switch ($ctype) {
                 case "convert":
-                    header("Content-Type: application/binary;");
+                    header("Content-Type: application/binary; charset=utf-8");
                     $chain->add(new OticWriterMiddleware($outputFile));
                     break;
 
@@ -79,7 +79,7 @@ class OticConvModule implements AppModule {
                     $chain->add(new PrintWriterMiddleware($outputFile));
                     break;
 
-                case "stats":
+                case "diag":
                     header("Content-Type: text/plain; charset=utf-8");
                     $chain->add(new NullWriterMiddelware());
                     $chain->getFirst()->setStats($stats = new OticStats());
@@ -88,7 +88,6 @@ class OticConvModule implements AppModule {
                 default:
                     throw new \InvalidArgumentException("Invalid ctype '$ctype'");
             }
-
 
 
             $chain->getFirst()->message(["in_file" => "php://input"]);

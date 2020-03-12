@@ -24,7 +24,7 @@ $middleWareMap = [
 
 
 $app = new App();
-$app->acl->addRule(aclRule()->route("/")->ALLOW());
+$app->acl->addRule(aclRule()->route("/*")->ALLOW());
 $app->addModule(new OticConvModule($middleWareMap));
 
 $app->serve();

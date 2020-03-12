@@ -20,7 +20,15 @@ benchgen | oticpack | dumpotic
 ```
 
 
-## Oticpack
+## Api
+
+Dump all sensors from sting otic input
+
+```php
+$data = OticDump::Dump("...otic-binary-data...", $stats);
+
+echo "Sensors read: " . $stats["sensors_read"]
+```
 
 
 

@@ -25,6 +25,6 @@ $map = [
 
 $chain = new OticChain();
 $chain->add(new CsvEvntReaderMiddleware(";", $map));
-$chain->add(new VerifyUnitsMiddleware());
+//$chain->add(new VerifyUnitsMiddleware());
 
 OticConfig::SetMwChain($chain);

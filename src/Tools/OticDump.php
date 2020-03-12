@@ -29,7 +29,7 @@ class OticDump
         ];
 
         $data = [];
-        $reader->setOnDataCallback(function ($timestamp, $colname, $unit, $value) use (&$data, $skipOut) {
+        $reader->setOnDataCallback(function ($timestamp, $colname, $unit, $value) use (&$data) {
             $data[] = [
                 "ts" => $timestamp,
                 "signal_name" => $colname,

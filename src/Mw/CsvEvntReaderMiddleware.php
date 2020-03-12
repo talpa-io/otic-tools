@@ -50,6 +50,7 @@ class CsvEvntReaderMiddleware extends AbstractOticMiddleware
         $stream = $inFile->fopen("r");
 
         while ( ! $stream->feof()) {
+
             $line = $stream->freadcsv(0, $this->delimiter);
             $this->stats->statsIncr("read.lines.csv.total");
             if ($line === null)
