@@ -25,6 +25,7 @@ class VerifyUnitsMiddleware extends AbstractOticMiddleware
         "deg" => ["min"=>-360, "max"=>360],
         "rpm" => true,
         "deg_c" => true,
+        "bool"  => ["min"=>0, "max"=>1]
     ];
 
     /**
