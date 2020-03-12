@@ -18,7 +18,7 @@ class MockWriterMiddleware extends AbstractOticMiddleware
     
     public function message(array $data) 
     {
-        $this->data[] = $message;
+        $this->data[] = $data;
         if ($this->next !== null)
             $this->next->message($data);
     }
