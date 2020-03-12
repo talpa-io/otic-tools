@@ -39,6 +39,11 @@ class OticStats
         $this->stats[$name]++;
     }
 
+    public function statsVal($name, $val)
+    {
+        $this->stats[$name] = $val;
+    }
+
     public function printStats()
     {
         $ret = "Warnings:";

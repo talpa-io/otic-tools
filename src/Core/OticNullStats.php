@@ -26,4 +26,9 @@ class OticNullStats extends OticStats
     {
         return; // Do nothing
     }
+
+    public function statsVal($name, $val)
+    {
+        return; //do nothing
+    }
 }
