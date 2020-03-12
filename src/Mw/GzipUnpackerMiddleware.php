@@ -25,10 +25,10 @@ class GzipUnpackerMiddleware extends AbstractOticMiddleware
         if ( ! isset($data["file_in"]))
             throw new \InvalidArgumentException("Expected array element 'file_in'");
 
-        $inFile = phore_file($data["file_in"]);
+        $inFile = $origInFile = phore_file($data["file_in"]);
         if ($data["file_in"] == "php://input") {
             $inFile = phore_tempfile();
-            $inFile->set_contents(phore_file("php://input")->get_contents());
+            $origInFile->streamCopyTo($inFile);
         }
 
 
