@@ -23,9 +23,9 @@ $middleWareMap = [
 ];
 
 $app = new App();
-$app->activateExceptionErrorHandlers();
 $app->acl->addRule(aclRule()->route("/*")->ALLOW());
 
+// Add the Otic Module - it is doing all for you
 $app->addModule(new OticConvModule($middleWareMap));
 
 $app->serve();

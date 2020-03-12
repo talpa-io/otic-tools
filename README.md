@@ -32,3 +32,31 @@ echo "Sensors read: " . $stats["sensors_read"]
 
 
 
+## Middlewares
+
+**Readers**
+
+- *CsvEnvtReaderMiddleware*: Read 4-col csv files
+- *GzipUnpackerMiddleware*: Unpack gzipped files
+
+
+**Transformers**
+
+- *UnitMapMiddleware*: Map legacy units to standard
+
+**Validators**
+
+- *VerifyUnitsMiddleware*: Skip records that contain units not in the standard
+
+**Writers**
+
+- *OticWriterMiddleware*: Default Writer on `/v1/convert` routes
+
+- *PrintWriterMiddleware*: Default Writer on `/v1/csv` routes
+
+- *NullWriterMiddleware*: A Endpoint for development
+
+- *MockWriterMiddleware*: A Endpoint for development (stores the result)
+
+
+
