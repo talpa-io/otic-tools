@@ -71,17 +71,14 @@ class OticConvModule implements AppModule {
             $chain = OticConfig::GetMwChain();
             switch ($ctype) {
                 case "convert":
-                    header("Content-Type: application/binary; charset=utf-8");
                     $chain->add(new OticWriterMiddleware($tmpOutput));
                     break;
 
                 case "csv":
-                    header("Content-Type: text/csv; charset=utf-8");
                     $chain->add(new PrintWriterMiddleware($tmpOutput));
                     break;
 
                 case "diag":
-                    header("Content-Type: text/plain; charset=utf-8");
                     $chain->add(new NullWriterMiddelware());
                     $chain->getFirst()->setStats($stats = new OticStats());
                     break;
@@ -96,8 +93,10 @@ class OticConvModule implements AppModule {
 
 
             if ($stats !== null) {
+                header("Content-Type: text/plain; charset=utf-8");
                 echo $stats->printStats();
             } else {
+                header("Content-Type: application/binary; charset=utf-8");
                 // Delay output, so exceptions can be triggered.
                 echo $tmpOutput->get_contents();
             }
