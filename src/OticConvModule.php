@@ -65,18 +65,19 @@ class OticConvModule implements AppModule {
         $app->router->post("/v1/:ctype/:tmid?/:dtype?", function ($ctype, string $tmid=null, string $dtype=null) {
             $this->_loadMiddlewareByDtype($dtype);
 
-            $outputFile = "php://output";
+            $tmpOutput = phore_tempfile();
+
             $stats = null;
             $chain = OticConfig::GetMwChain();
             switch ($ctype) {
                 case "convert":
                     header("Content-Type: application/binary; charset=utf-8");
-                    $chain->add(new OticWriterMiddleware($outputFile));
+                    $chain->add(new OticWriterMiddleware($tmpOutput));
                     break;
 
                 case "csv":
                     header("Content-Type: text/csv; charset=utf-8");
-                    $chain->add(new PrintWriterMiddleware($outputFile));
+                    $chain->add(new PrintWriterMiddleware($tmpOutput));
                     break;
 
                 case "diag":
@@ -93,8 +94,13 @@ class OticConvModule implements AppModule {
             $chain->getFirst()->message(["file_in" => "php://input"]);
             $chain->getFirst()->onClose();
 
-            if ($stats !== null)
+
+            if ($stats !== null) {
                 echo $stats->printStats();
+            } else {
+                // Delay output, so exceptions can be triggered.
+                echo $tmpOutput->get_contents();
+            }
 
             return true;
 
