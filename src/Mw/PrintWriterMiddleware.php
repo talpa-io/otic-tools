@@ -39,7 +39,7 @@ class PrintWriterMiddleware extends AbstractOticMiddleware
      */
     public function message(array $data)
     {
-        $this->fh->write(implode(";", [$data["ts"], $data["signal_name"], $data["mu"], $data["val"]]) . "\n");
+        $this->fh->write(implode(";", [$data["ts"], $data["sig"], $data["mu"], $data["val"]]) . "\n");
     }
 
     public function onClose()

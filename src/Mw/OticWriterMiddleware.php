@@ -31,7 +31,7 @@ class OticWriterMiddleware extends AbstractOticMiddleware
      */
     public function message(array $data)
     {
-        $this->oticWriter->inject($data["ts"], $data["signal_name"], $data["val"], $data["mu"]);
+        $this->oticWriter->inject($data["ts"], $data["sig"], $data["val"], $data["mu"]);
     }
 
     public function onClose()

@@ -86,7 +86,7 @@ class VerifyUnitsMiddleware extends AbstractOticMiddleware
         // Cache check result
         if ( ! isset ($this->checkedUnits[$unit])) {
             $this->checkedUnits[$unit] = $this->isValidUnit($unit, $errUnit);
-            $this->stats->warn("Unit '$unit' not allowed [Subunit: '$errUnit']- stripped. (Sensor: '{$data["signal_name"]}')");
+            $this->stats->warn("Unit '$unit' not allowed [Subunit: '$errUnit']- stripped. (Sensor: '{$data["sig"]}')");
         }
 
 
