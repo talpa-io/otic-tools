@@ -1,0 +1,15 @@
+# List of allowed units
+# Allowed name;Readable Name;Display name;Description(optional)
+
+a;Ampere;A
+v;Voltage;V
+
+deg;Degree;°
+deg_c;Degree Celsius;°C
+prcnt;Percent;%
+
+# Time
+s;Second;s
+
+# Longitude
+m;Meter;m
