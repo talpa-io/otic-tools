@@ -97,7 +97,8 @@ class AutoUnitMapperMiddleware extends AbstractOticMiddleware
         if ( ! isset ($this->mappedUnits[$mu])) {
             $this->mappedUnits[$mu] = $this->mapUnit($mu);
         }
-
-        return $this->mappedUnits[$mu];
+        
+        $data["mu"] = $this->mappedUnits[$mu];
+        $this->next->message($data);
     }
 }
