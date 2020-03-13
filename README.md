@@ -1,6 +1,10 @@
 # otic-tools
 
 
+- [List of allowed units](src/allowed_units.csv): All units allowed in otic format
+
+
+
 ## Benchgen
 
 Create reproducible csv output for testing timeseries
