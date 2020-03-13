@@ -46,7 +46,7 @@ class VerifyUnitsMiddleware extends AbstractOticMiddleware
     }
 
 
-    public function isValidUnit(string $unit, string &$errUnit="") : bool
+    public function isValidUnit(string $unit, string &$errUnit=null) : bool
     {
         foreach (explode("/", $unit) as $unit) {
             if ( ! preg_match("/^(\[e(?<prefix>[\+\-][0-9])\])?(?<unit>[a-z_-]+)(\^(?<exp>[\+\-]?[0-9]+))?$/", $unit, $matches)) {
