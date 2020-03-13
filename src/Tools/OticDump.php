@@ -32,7 +32,7 @@ class OticDump
         $reader->setOnDataCallback(function ($timestamp, $colname, $unit, $value) use (&$data) {
             $data[] = [
                 "ts" => $timestamp,
-                "signal_name" => $colname,
+                "sig" => $colname,
                 "mu" => $unit,
                 "val" => $value
             ];
