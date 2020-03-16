@@ -32,7 +32,7 @@ Open Telemetry Interchange Container - Dump otic file
 Usage:
 
     {$_SERVER['argv'][0]} <arguments>
-    
+
 Parameters:
 
     -h          Print Help
@@ -40,7 +40,7 @@ Parameters:
     -i <file>   Input file (default: stdin)
     -o <file>   Output to file (default: stdout)
     --skipout   Read only the data, no output
- 
+
 EOT;
         echo "\n\n";
 
@@ -56,7 +56,7 @@ EOT;
         }
 
         if ($opts->has("v")) {
-            echo "Libotic version: " . \Otic\getLibOticVersion() . "\n";
+            echo "Libotic version: " . \getLibOticVersion() . "\n";
             exit(127);
         }
 

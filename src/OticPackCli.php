@@ -33,7 +33,7 @@ Open Telemetry Interchange Container - Packager and Formating
 Usage:
 
     {$_SERVER['argv'][0]} <arguments>
-    
+
 Parameters:
 
     -h          Print Help
@@ -58,7 +58,7 @@ EOT;
         }
 
         if ($opts->has("v")) {
-            echo "Libotic version: " . \Otic\getLibOticVersion() . "\n";
+            echo "Libotic version: " . \getLibOticVersion() . "\n";
             exit(127);
         }
 
