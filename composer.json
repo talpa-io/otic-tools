@@ -33,7 +33,7 @@
   },
   "minimum-stability": "dev",
   "require-dev": {
-    "talpa/otic-php": "dev-otic_v3",
+    "talpa/otic-php": "dev-otic2",
     "phore/micro-app": "dev-master",
     "phore/http-client": "dev-master",
     "phpunit/phpunit": "*"
