@@ -60,7 +60,7 @@ class OticConvModule implements AppModule {
         set_time_limit(1200);
 
         $app->router->get("/", function () {
-            return ["success"=>true, "msg"=>"Converter ready"];
+            return ["success"=>true, "msg"=>"Converter ready", "converters" => array_keys($this->ctypeToMwMap)];
         });
 
         $app->router->post("/v1/:ctype/:tmid?/:dtype?", function ($ctype, string $tmid=null, string $dtype=null) {
