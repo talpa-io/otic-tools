@@ -26,7 +26,7 @@ class MockWriterMiddleware extends AbstractOticMiddleware
     
     public function getCount()
     {
-        return $this->data;
+        return count ($this->data);
     }
     
 }
