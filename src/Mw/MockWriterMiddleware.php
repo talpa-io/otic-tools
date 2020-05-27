@@ -22,9 +22,13 @@ class MockWriterMiddleware extends AbstractOticMiddleware
         if ($this->next !== null)
             $this->next->message($data);
     }
-    
-    
-    public function getCount()
+
+    /**
+     * Return the number of datasets received
+     * 
+     * @return int
+     */
+    public function getCount() : int
     {
         return count ($this->data);
     }
