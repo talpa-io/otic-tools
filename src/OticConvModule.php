@@ -93,10 +93,7 @@ class OticConvModule implements AppModule {
             $tmpIn = new PhoreTempFile();
             phore_file("php://input")->streamCopyTo($tmpIn);
 
-            $chain->getFirst()->message(["file_in" => $tmpIn]);
-
-
-            $chain->getFirst()->message(["file_in" => (string)$tmpInput]);
+            $chain->getFirst()->message(["file_in" => (string)$tmpIn]);
             $chain->getFirst()->onClose();
 
 
