@@ -14,6 +14,7 @@ use OticTools\Core\OticStats;
 use OticTools\Mw\NullWriterMiddelware;
 use OticTools\Mw\OticWriterMiddleware;
 use OticTools\Mw\PrintWriterMiddleware;
+use Phore\FileSystem\PhoreTempFile;
 use Phore\MicroApp\App;
 use Phore\MicroApp\AppModule;
 use Phore\MicroApp\Handler\JsonExceptionHandler;
@@ -88,8 +89,11 @@ class OticConvModule implements AppModule {
                     throw new \InvalidArgumentException("Invalid ctype '$ctype'");
             }
 
+            // Use a tmp file as input
+            $tmpIn = new PhoreTempFile();
+            phore_file("php://input")->streamCopyTo($tmpIn);
 
-            $chain->getFirst()->message(["file_in" => "php://input"]);
+            $chain->getFirst()->message(["file_in" => $tmpIn]);
             $chain->getFirst()->onClose();
 
 
