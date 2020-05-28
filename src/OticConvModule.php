@@ -88,8 +88,11 @@ class OticConvModule implements AppModule {
                     throw new \InvalidArgumentException("Invalid ctype '$ctype'");
             }
 
+            $tmpInput = phore_tempfile();
+            phore_file("php://input")->streamCopyTo($tmpInput);
 
-            $chain->getFirst()->message(["file_in" => "php://input"]);
+
+            $chain->getFirst()->message(["file_in" => (string)$tmpInput]);
             $chain->getFirst()->onClose();
 
 
